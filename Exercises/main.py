@@ -6,8 +6,10 @@ from kivymd.uix.button import MDRaisedButton, MDRectangleFlatButton, MDIconButto
 # from kivymd.uix.textfield import MDTextField
 from kivymd.uix.dialog import MDDialog
 from kivy.lang import Builder # to use e.g. MDTextField within a string --> automatically is imported through Builder
-from helpers import username_helper
-
+from helpers import username_helper, list_helper_1, list_helper_2
+from kivymd.uix.list import MDList, OneLineListItem, TwoLineListItem, ThreeLineListItem, ThreeLineIconListItem, ThreeLineAvatarListItem
+from kivymd.uix.list import IconLeftWidget, ImageLeftWidget, ImageRightWidget
+from kivy.uix.scrollview import ScrollView
 
 class DemoApp(MDApp): # inherit all MDApp functionalities
 
@@ -20,9 +22,16 @@ class DemoApp(MDApp): # inherit all MDApp functionalities
 
         screen = Screen() # similar to layout functionality in kivy basics
 
+        scroll = ScrollView()
+        list_view = MDList()
+        scroll.add_widget(list_view)
+
         # BUTTONS ------------------------------------------------------------------------------------------------------
-        btn_flat = MDRectangleFlatButton(text='Show', pos_hint={'center_x': 0.5, 'center_y': 0.4},
-                                         on_release=self.show_data)
+        btn_username = MDRectangleFlatButton(text='Show username', pos_hint={'center_x': 0.4, 'center_y': 0.4},
+                                         on_release=self.show_dialogbox)
+        btn_list = MDRectangleFlatButton(text='Show list', pos_hint={'center_x': 0.6, 'center_y': 0.4}
+                                         #on_release=self.show_list
+                                         )
         # icon_btn = MDIconButton(icon = 'android', pos_hint = {'center_x':0.5, 'center_y':0.5})
         # btn_action = MDFloatingActionButton(icon = 'android', pos_hint = {'center_x':0.5, 'center_y':0.5})
 
@@ -43,12 +52,50 @@ class DemoApp(MDApp): # inherit all MDApp functionalities
         #                 text_color=(0,0,1,1))
         # label = MDIcon(icon="android", halign="right")
 
+        # LISTS --------------------------------------------------------------------------------------------------------
+        # item1 = OneLineListItem(text='Item 1')
+        # item2 = OneLineListItem(text='Item 2')
+        #for i in range(20):
+            # Option I ........................................
+            # items = OneLineListItem(text='Item ' + str(i))
+            # items = ThreeLineListItem(text='Item ' + str(i),
+            #                           secondary_text = 'Hello World',
+            #                            tertiary_text = 'Third line text')
+
+            # Option II .......................................
+            #icon = IconLeftWidget(icon='android')
+            #items = ThreeLineIconListItem(text='Item ' + str(i),
+            #                              secondary_text = 'Hello World',
+            #                              tertiary_text = 'Third line text')
+            #items.add_widget(icon)
+
+            # Option III ......................................
+            #avatar = ImageRightWidget(source='cute.png') # gives error, kivyMD are trying to fix this
+            #avatar = ImageLeftWidget(source='cute.png')  # gives error, kivyMD are trying to fix this
+            #items = ThreeLineAvatarListItem(text='Item ' + str(i),
+            #                                secondary_text = 'Hello World',
+            #                                tertiary_text = 'Third line text')
+            #items.add_widget(avatar)
+            #list_view.add_widget(items)
+
+            # Option IV --> using Builder method, see below  .....
+
+
         # SCREEN OUTPUT ------------------------------------------------------------------------------------------------
-        screen.add_widget(self.username)
-        screen.add_widget(btn_flat)
+        #screen.add_widget(self.username)
+        #screen.add_widget(btn_username)
+        #screen.add_widget(btn_list)
+
+        #list_view.add_widget(item1)
+        #list_view.add_widget(item2)
+
+        #screen.add_widget(scroll)
+
+        screen = Builder.load_string(list_helper_1)
+
         return screen
 
-    def show_data(self, obj):
+    def show_dialogbox(self, obj):
         if self.username.text is "":
             check_string = 'Please enter a username'
         else:
@@ -62,6 +109,11 @@ class DemoApp(MDApp): # inherit all MDApp functionalities
         self.dialog.open()
     def close_dialog(self, obj):
         self.dialog.dismiss()
+
+    # def on_start(self): # is gonna show up before applications starts running, in this case a list
+    #     for i in range(20):
+    #         items = OneLineListItem(text='Item ' + str(i))
+    #         self.root.ids.container.add_widget(items) # container = name of the ids given in the list_helper_2
 
 # run application
 DemoApp().run()

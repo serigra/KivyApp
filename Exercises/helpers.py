@@ -12,3 +12,28 @@ MDTextField:
     size_hint_x:None
     width:300
 """
+
+list_helper_1 = """
+Screen:
+    ScrollView:
+        MDList:
+            OneLineIconListItem:
+                text: 'Item 1'
+                    
+                IconLeftWidget: 
+                    icon: 'github'
+            
+            OneLineIconListItem:
+                text: 'Item 2'
+                
+                IconLeftWidget: 
+                    icon: 'github'
+"""
+
+
+list_helper_2 = """
+Screen:
+    ScrollView:
+        MDList:
+            id: container
+"""
