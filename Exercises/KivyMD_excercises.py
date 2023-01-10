@@ -6,7 +6,7 @@ from kivymd.uix.button import MDRaisedButton, MDRectangleFlatButton, MDIconButto
 # from kivymd.uix.textfield import MDTextField
 from kivymd.uix.dialog import MDDialog
 from kivy.lang import Builder # to use e.g. MDTextField within a string --> automatically is imported through Builder
-from helpers import username_helper, list_helper_1, list_helper_2
+from Builder_helpers import username_helper, list_helper_1, list_helper_2
 from kivymd.uix.list import MDList, OneLineListItem, TwoLineListItem, ThreeLineListItem, ThreeLineIconListItem, ThreeLineAvatarListItem
 from kivymd.uix.list import IconLeftWidget, ImageLeftWidget, ImageRightWidget
 from kivy.uix.scrollview import ScrollView
